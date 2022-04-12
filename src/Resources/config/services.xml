@@ -14,50 +14,63 @@
 
         <service id="JMS\ObjectRouting\ObjectRouter">
             <argument type="service" id="bg_object_routing.adapter" />
-            <argument type="service" id="bg_object_routing.metadata_factory" />
+            <argument type="service" id="Metadata\MetadataFactory" />
         </service>
-        <service id="bg_object_routing.object_router" alias="JMS\ObjectRouting\ObjectRouter" public="true" />
+        <service id="bg_object_routing.object_router" alias="JMS\ObjectRouting\ObjectRouter" public="true">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
+        </service>
 
         <service id="JMS\ObjectRouting\Twig\RoutingExtension">
-            <argument type="service" id="bg_object_routing.object_router" />
+            <argument type="service" id="JMS\ObjectRouting\ObjectRouter" />
             <tag name="twig.extension"/>
         </service>
-        <service id="bg_object_routing.twig_extension" alias="JMS\ObjectRouting\Twig\RoutingExtension" />
+        <service id="bg_object_routing.twig_extension" alias="JMS\ObjectRouting\Twig\RoutingExtension">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
+        </service>
 
-        <service id="Metadata\Driver\DriverChain">
+        <service id="Metadata\Driver\DriverInterface" alias="Metadata\Driver\DriverChain" public="true" />
+        <service id="Metadata\Driver\DriverChain" public="true">
             <argument type="collection">
-                <argument type="service" id="bg_object_routing.annotation_driver" />
+                <argument type="service" id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver" />
             </argument>
         </service>
-        <service id="bg_object_routing.driver_chain" alias="Metadata\Driver\DriverChain" />
-        <service id="bg_object_routing.metadata_driver" alias="Metadata\Driver\DriverChain" public="true" />
-
-        <service id="Metadata\Driver\LazyLoadingDriver">
-            <argument type="service" id="service_container" />
-            <argument>bg_object_routing.metadata_driver</argument>
+        <service id="bg_object_routing.driver_chain" alias="Metadata\Driver\DriverChain">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
         </service>
-        <service id="bg_object_routing.lazy_loading_driver" alias="Metadata\Driver\LazyLoadingDriver" />
+        <service id="bg_object_routing.metadata_driver" alias="Metadata\Driver\DriverChain" public="true">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
+        </service>
 
         <service id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver">
             <argument type="service" id="annotation_reader" />
         </service>
-        <service id="bg_object_routing.annotation_driver" alias="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver" />
+        <service id="bg_object_routing.annotation_driver" alias="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
+        </service>
+
+        <service id="Metadata\Cache\CacheInterface" alias="Metadata\Cache\FileCache" />
 
         <service id="Metadata\Cache\FileCache">
             <argument>%bg_object_routing.cache_dir%</argument>
             <argument>%kernel.debug%</argument>
         </service>
-        <service id="bg_object_routing.file_cache" alias="Metadata\Cache\FileCache" />
+        <service id="bg_object_routing.file_cache" alias="Metadata\Cache\FileCache">
+            <deprecated package="webfactory/object-routing-bundle" version="2.3.0" />
+        </service>
 
         <service id="Metadata\MetadataFactory">
-            <argument type="service" id="bg_object_routing.lazy_loading_driver" />
-            <argument type="service" id="bg_object_routing.file_cache" />
+            <argument type="service">
+                <service class="Metadata\Driver\LazyLoadingDriver">
+                    <argument type="service" id="service_container" />
+                    <argument>Metadata\Driver\DriverInterface</argument>
+                </service>
+            </argument>
+            <argument type="service" id="Metadata\Cache\CacheInterface" />
             <argument>%kernel.debug%</argument>
             <call method="setIncludeInterfaces">
                 <argument>true</argument>
             </call>
         </service>
-        <service id="bg_object_routing.metadata_factory" alias="Metadata\MetadataFactory" />
 
     </services>
 </container>
