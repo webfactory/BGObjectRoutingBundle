@@ -9,7 +9,7 @@
         <defaults public="false" />
 
         <service id="bg_object_routing.adapter" alias="JMS\ObjectRouting\RouterInterface">
-            <deprecated />
+            <deprecated package="webfactory/object-routing-bundle" version="2.4.0" />
         </service>
         <service id="JMS\ObjectRouting\RouterInterface" alias="JMS\ObjectRouting\Symfony\Symfony22Adapter" />
         <service id="JMS\ObjectRouting\Symfony\Symfony22Adapter">
@@ -22,7 +22,7 @@
             <argument type="service" id="Metadata\MetadataFactory" />
         </service>
         <service id="bg_object_routing.object_router" alias="JMS\ObjectRouting\ObjectRouter" public="true">
-            <deprecated />
+            <deprecated package="webfactory/object-routing-bundle" version="2.4.0" />
         </service>
 
         <service id="JMS\ObjectRouting\Twig\RoutingExtension">
