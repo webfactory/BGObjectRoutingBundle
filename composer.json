@@ -25,7 +25,7 @@
         "symfony/config": "^5.0|^6.0|^7.0",
         "symfony/dependency-injection": "^5.0|^6.0|^7.0",
         "symfony/http-kernel": "^5.0|^6.0|^7.0",
-        "webfactory/object-routing": "^1.5",
+        "webfactory/object-routing": "dev-168718_symfony_7 as 1.6",
         "jms/metadata": "^2.6"
     },
 
