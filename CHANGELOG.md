@@ -2,6 +2,7 @@
 
 * The `bg_object_routing.adapter` service has been removed. It was an alias for `JMS\ObjectRouting\RouterInterface`, use that service ID instead (or use autowiring).
 * The `bg_object_routing.object_router` service has been removed. It was an alias for `JMS\ObjectRouting\ObjectRouter`, use that service ID instead (or use autowiring).
+* The `AnnotationDriver` has been removed from the driver chain. Use PHP 8 attributes instead of annotations for object route definitions. 
 
 # Version 2.0.0
 
