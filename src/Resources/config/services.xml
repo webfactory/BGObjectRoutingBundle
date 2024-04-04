@@ -21,12 +21,10 @@
         <service id="Metadata\Driver\DriverChain">
             <argument type="collection">
                 <argument type="service" id="JMS\ObjectRouting\Metadata\Driver\AttributeDriver" />
-                <argument type="service" id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver" />
             </argument>
         </service>
 
         <service id="JMS\ObjectRouting\Metadata\Driver\AttributeDriver" />
-        <service id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver" />
 
         <service id="Metadata\Cache\CacheInterface" alias="Metadata\Cache\FileCache" />
 
