@@ -34,10 +34,12 @@
         <service id="Metadata\Driver\DriverInterface" alias="Metadata\Driver\DriverChain" public="true" />
         <service id="Metadata\Driver\DriverChain">
             <argument type="collection">
+                <argument type="service" id="JMS\ObjectRouting\Metadata\Driver\AttributeDriver" />
                 <argument type="service" id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver" />
             </argument>
         </service>
 
+        <service id="JMS\ObjectRouting\Metadata\Driver\AttributeDriver" />
         <service id="JMS\ObjectRouting\Metadata\Driver\AnnotationDriver">
             <argument type="service" id="annotation_reader" />
         </service>
